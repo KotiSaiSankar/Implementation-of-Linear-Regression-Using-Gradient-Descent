@@ -8,18 +8,12 @@ To write a program to predict the profit of a city using the linear regression m
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1.Start the program.
-  
-  2.Import numpy as np.
-  
-  3.Give the header to the data.
-  
-  4.Find the profit of population.
-  
-  5.Plot the required graph for both for Gradient Descent Graph and Prediction Graph.
-  
-  6.End the program.
-  
+1. Import numpy, pandas modules and StandardScaler from sklearn module
+2. Define the function linear_regression - with variables, learning rate and the number of times to be iterated
+3. Read the csv file and create the dataframe
+4. Assume the last column is your target variable 'y' and the preceding columns and define X1
+5. Learn the model parameters
+6. Predict the target value for a new data point
 
 ## Program:
 ```
@@ -28,26 +22,27 @@ Program to implement the linear regression using gradient descent.
 Developed by: Koti Sai Sankar
 RegisterNumber:  212222240111
 */
-
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 def linear_regression(X1,y,learning_rate=0.1,num_iters=1000):
     X=np.c_[np.ones(len(X1)),X1]
+    
     theta=np.zeros(X.shape[1]).reshape(-1,1)
     
     for _ in range(num_iters):
-        
+        #Calculate predictions
         predictions=(X).dot(theta).reshape(-1,1)
-        
+        #calculate errors
         errors=(predictions-y).reshape(-1,1)
-        
+        #Update theta using gradient descent
         theta-=learning_rate*(1/len(X1))*X.T.dot(errors)
     return theta
 
-data=pd.read_csv("C:/Users/admin/Downloads/50_Startups.csv",header=None)
+data=pd.read_csv("50_Startups.csv",header=None)
 data.head()
 
+#Assuming the last column is your target variable 'y' and the preceding columns
 X=(data.iloc[1:,:-2].values)
 X1=X.astype(float)
 
@@ -58,7 +53,9 @@ Y1_Scaled=scaler.fit_transform(y)
 print(X)
 print(X1_Scaled)
 
+#Learn model Parameters
 theta=linear_regression(X1_Scaled,Y1_Scaled)
+#Predict target value for a new data point
 new_data=np.array([165349.2,136897.8,471784.1]).reshape(-1,1)
 new_Scaled=scaler.fit_transform(new_data)
 prediction=np.dot(np.append(1,new_Scaled),theta)
@@ -70,11 +67,7 @@ print(f"Predicted value: {pre}")
 ```
 
 ## Output:
-![ml1](https://github.com/anu-varshini11/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/138969827/e5c5fcdf-d0b1-418b-8d69-4c892b099b05)
-![ml2](https://github.com/anu-varshini11/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/138969827/475640c7-9efb-4ca2-882a-aa52906026bd)
-![ml3](https://github.com/anu-varshini11/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/138969827/c81d7ffe-da92-491d-912d-9768469b2f81)
-![ml4](https://github.com/anu-varshini11/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/138969827/08015703-2b5b-423a-87c5-829f74f66c95)
-
+![linear regression using gradient descent](https://github.com/joeljohnjobinse/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/138955488/765eb6e3-204a-46d0-9ec0-3aa546eb93d3)
 
 ## Result:
 Thus the program to implement the linear regression using gradient descent is written and verified using python programming.
